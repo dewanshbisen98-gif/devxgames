@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I'm Sorry 💔</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-align: center;
+    }h1 {
+  font-size: 3rem;
+  animation: fadeIn 2s ease-in-out;
+}
+
+p {
+  font-size: 1.3rem;
+  margin-top: 15px;
+  min-height: 40px;
+  white-space: nowrap;
+  border-right: 2px solid #fff;
+  width: 0;
+  overflow: hidden;
+  animation: typing 5s steps(40, end) forwards, blink 0.7s step-end infinite;
+}
+
+button {
+  margin-top: 40px;
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 30px;
+  background: #fff;
+  color: #ff3b6a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  animation: bounce 2s infinite;
+  z-index: 10;
+}
+
+button:hover {
+  background: #ffe4ec;
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  transform: rotate(45deg);
+  animation: floatUp 6s linear infinite;
+  opacity: 0.6;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.heart::before { top: -10px; left: 0; }
+.heart::after { top: 0; left: -10px; }
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh) rotate(45deg); opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+}
+
+/* Burst effect */
+.burst-heart {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #ff2e63;
+  transform: rotate(45deg);
+  opacity: 0;
+  animation: burst 1s ease-out forwards;
+}
+
+.burst-heart::before,
+.burst-heart::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #ff2e63;
+  border-radius: 50%;
+}
+
+.burst-heart::before { top: -7px; left: 0; }
+.burst-heart::after { top: 0; left: -7px; }
+
+@keyframes burst {
+  0% { transform: scale(0.5) rotate(45deg); opacity: 1; }
+  100% { transform: scale(3) rotate(45deg); opacity: 0; }
+}
+
+  </style>
+</head>
+<body>
+  <h1>💔 I'm Sorry 💔</h1>
+  <p id="message">I never meant to hurt you... Please forgive me.</p>
+  <button onclick="showNewMessage(event)">Forgive Me?</button>  <!-- Background Music -->  <audio autoplay loop>
+    <source src="miaw miaw miaw song sad (lyrics video visual).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 500);
+
+    function showNewMessage(event) {
+      const message = document.getElementById('message');
+      message.style.width = '0';
+      message.style.animation = 'none';
+      void message.offsetWidth; // trigger reflow
+      message.textContent = "Thank you for forgiving me ❤️ You mean everything to me.";
+      message.style.animation = 'typing 6s steps(50, end) forwards, blink 0.7s step-end infinite';
+
+      // Burst hearts effect
+      for (let i = 0; i < 15; i++) {
+        const burst = document.createElement('div');
+        burst.className = 'burst-heart';
+        burst.style.left = event.clientX + 'px';
+        burst.style.top = event.clientY + 'px';
+        burst.style.animationDelay = (i * 0.05) + 's';
+        document.body.appendChild(burst);
+
+        setTimeout(() => burst.remove(), 1000);
+      }
+    }
+  </script></body>
+</html>
